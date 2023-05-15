@@ -2,6 +2,10 @@
 package bankingapplication2;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Bank {
@@ -15,10 +19,20 @@ public class Bank {
         System.out.println("Hello");
     }
     
-    public void openAccount(int accountNumber, String accountName){
+    public void openAccount(int accountNumber, String accountName, double balance){
         Connection connection = BankingConnection.connect();
         String sql = "INSERT INTO account(accNumber, accName, accBalance)"
                     + "VALUES(?,?,?,?,?)";
+  
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, accountNumber);
+            preparedStatement.setString(2, accountName);
+            preparedStatement.setDouble(3, balance);
+        } catch (SQLException ex) {
+            Logger.getLogger(Bank.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     public void closeAccount(int accountNumber){

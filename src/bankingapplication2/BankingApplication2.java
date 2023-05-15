@@ -7,10 +7,10 @@ public class BankingApplication2 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Bank bank = new Bank("My Bank");
-        int option = 0;
+        int option = 0, accountNumber;
         String accountName;
-        int accountNumber;
         double amount;
+        double balance;
         
         while (option != 6) {
             System.out.println("Main Menu");
@@ -35,7 +35,9 @@ public class BankingApplication2 {
                     scan.nextLine();
                     System.out.print("Enter Account Name:");
                     accountName = scan.nextLine();
-                    bank.openAccount(accountNumber, accountName);
+                    System.out.println("Enter Initial Balance: ");
+                    balance = scan.nextDouble();
+                    bank.openAccount(accountNumber, accountName, balance);
                     break;
                 case 3:
                     System.out.print("Enter Account Number:");
