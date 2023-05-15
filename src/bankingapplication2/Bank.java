@@ -3,7 +3,9 @@ package bankingapplication2;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +19,21 @@ public class Bank {
     
     public void listAccount(){
         Connection connection = BankingConnection.connect();
-        String sql = "SELECT * FROM ACCOUNT";
+        String sql = "SELECT * FROM account";
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(sql);
+            
+            while (results.next()){
+                System.out.println(results.getString(1)+" "+results.getString(2)
+                +" "+results.getString(3));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Bank.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
     public void openAccount(int accountNumber, String accountName, double balance){
@@ -38,7 +54,16 @@ public class Bank {
     }
     
     public void closeAccount(int accountNumber){
-        System.out.println("Hello");
+        Connection connection = BankingConnection.connect();
+        String sql = "DELETE from account WHERE accNumber=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, accountNumber);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Bank.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
     public void depositMoney(int accountNumber,double amount){
@@ -47,5 +72,27 @@ public class Bank {
     
     public void withdrawMoney(int accountNumber,double amount){
         System.out.println("Hello");
+    }
+    
+    public Account getAccount(int accountNumber) {
+        Account account = null;
+        Connection connection = BankingConnection.connect();
+        String sql = "SELECT * FROM account WHERE accNumber=?";
+        
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, accountNumber);
+            ResultSet results = preparedStatement.executeQuery();
+            
+            results.next();
+            
+            account = new Account(results.getInt(1), results.getString(2), results.getDouble(3));
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Bank.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return account;
+
+        
     }
 }
