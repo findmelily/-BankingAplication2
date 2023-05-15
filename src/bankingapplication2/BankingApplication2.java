@@ -30,25 +30,33 @@ public class BankingApplication2 {
                     bank.listAccount();
                     break;
                 case 2:
-                    System.out.println("Enter Account Number:");
+                    System.out.print("Enter Account Number:");
                     accountNumber = scan.nextInt();
                     scan.nextLine();
-                    System.out.println("Enter Account Name:");
+                    System.out.print("Enter Account Name:");
                     accountName = scan.nextLine();
                     bank.openAccount(accountNumber, accountName);
                     break;
                 case 3:
-                    accountNumber = 111111;
+                    System.out.print("Enter Account Number:");
+                    accountNumber = scan.nextInt();
+                    scan.nextLine();
                     bank.closeAccount(accountNumber);
                     break;
                 case 4: 
-                    accountNumber =111111;
-                    amount = 500;
+                    System.out.print("Enter Account Number:");
+                    accountNumber = scan.nextInt();
+                    scan.nextLine();
+                    System.out.print("Enter Amount: ");
+                    amount = scan.nextDouble();
                     bank.depositMoney(accountNumber, amount);
                     break;
                 case 5:
-                    accountNumber =111111;
-                    amount = 500;
+                    System.out.print("Enter Account Number:");
+                    accountNumber = scan.nextInt();
+                    scan.nextLine();
+                    System.out.print("Enter Amount: ");
+                    amount = scan.nextDouble();
                     bank.withdrawMoney(accountNumber, amount);
                     break;
             }

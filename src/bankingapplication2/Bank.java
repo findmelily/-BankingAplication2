@@ -1,6 +1,8 @@
 
 package bankingapplication2;
 
+import java.sql.Connection;
+
 
 public class Bank {
     private String name;
@@ -14,7 +16,9 @@ public class Bank {
     }
     
     public void openAccount(int accountNumber, String accountName){
-        System.out.println("Hello");
+        Connection connection = BankingConnection.connect();
+        String sql = "INSERT INTO account(accNumber, accName, accBalance)"
+                    + "VALUES(?,?,?,?,?)";
     }
     
     public void closeAccount(int accountNumber){
