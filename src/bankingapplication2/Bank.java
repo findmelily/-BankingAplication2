@@ -19,10 +19,10 @@ public class Bank {
     
     public void listAccount(){
         Connection connection = BankingConnection.connect();
-        String sql = "SELECT * FROM account";
         
         try {
             Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM account";
             ResultSet results = statement.executeQuery(sql);
             
             while (results.next()){
@@ -39,7 +39,7 @@ public class Bank {
     public void openAccount(int accountNumber, String accountName, double balance){
         Connection connection = BankingConnection.connect();
         String sql = "INSERT INTO account(accNumber, accName, accBalance)"
-                    + "VALUES(?,?,?,?,?)";
+                    + "VALUES(?,?,?)";
   
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -70,6 +70,7 @@ public class Bank {
     public void depositMoney(int accountNumber,double amount){
         Account account = getAccount(accountNumber);
         account.deposit(amount);
+        System.out.println(account.getBalance());
         
         Connection connection = BankingConnection.connect();
         String sql = "UPDATE account SET accBalance=? WHERE accNumber=?";

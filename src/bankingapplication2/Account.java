@@ -28,8 +28,5 @@ public class Account {
         return this.accountNumber;
     }
     
-    public String getaccountNumber() {
-        return this.accountName;
-    }
     
 }
