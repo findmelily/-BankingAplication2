@@ -1,5 +1,6 @@
 package bankingapplication2;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class BankingApplication2 {
@@ -24,18 +25,17 @@ public class BankingApplication2 {
 
             System.out.print("Enter your choice : ");
             option = scan.nextInt();
+            scan.nextLine();
 
             switch (option) {
                 case 1:
                     bank.listAccount();
                     break;
                 case 2:
-                    System.out.print("Enter Account Number:");
-                    accountNumber = scan.nextInt();
-                    scan.nextLine();
-                    System.out.print("Enter Account Name:");
+                    accountNumber = genAccountNumber();
+                    System.out.print("Enter Acount Name: ");
                     accountName = scan.nextLine();
-                    System.out.println("Enter Initial Balance: ");
+                    System.out.print("Enter Initial Balance: ");
                     balance = scan.nextDouble();
                     bank.openAccount(accountNumber, accountName, balance);
                     break;
@@ -65,5 +65,11 @@ public class BankingApplication2 {
             System.out.println();
         }
         
+    }
+    
+    public static int genAccountNumber() {
+        Random rand = new Random();
+        int accNumber = 100000 + rand.nextInt(900000);
+        return accNumber;
     }
 }

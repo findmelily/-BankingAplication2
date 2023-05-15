@@ -16,7 +16,8 @@ public class Bank {
     }
     
     public void listAccount(){
-        System.out.println("Hello");
+        Connection connection = BankingConnection.connect();
+        String sql = "SELECT * FROM ACCOUNT";
     }
     
     public void openAccount(int accountNumber, String accountName, double balance){
@@ -29,6 +30,7 @@ public class Bank {
             preparedStatement.setInt(1, accountNumber);
             preparedStatement.setString(2, accountName);
             preparedStatement.setDouble(3, balance);
+            preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Bank.class.getName()).log(Level.SEVERE, null, ex);
         }
