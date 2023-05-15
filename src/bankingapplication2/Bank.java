@@ -64,10 +64,25 @@ public class Bank {
             Logger.getLogger(Bank.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        
     }
     
     public void depositMoney(int accountNumber,double amount){
-        System.out.println("Hello");
+        Account account = getAccount(accountNumber);
+        account.deposit(amount);
+        
+        Connection connection = BankingConnection.connect();
+        String sql = "UPDATE account SET accBalance=? WHERE accNumber=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setDouble(1, account.getBalance());
+            preparedStatement.setInt(2, account.getAccountNumber());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Bank.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }
     
     public void withdrawMoney(int accountNumber,double amount){
