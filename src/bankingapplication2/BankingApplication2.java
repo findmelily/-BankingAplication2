@@ -40,13 +40,13 @@ public class BankingApplication2 {
                     bank.openAccount(accountNumber, accountName, balance);
                     break;
                 case 3:
-                    System.out.print("Enter Account Number:");
+                    System.out.print("Enter Account Number: ");
                     accountNumber = scan.nextInt();
                     scan.nextLine();
                     bank.closeAccount(accountNumber);
                     break;
                 case 4: 
-                    System.out.print("Enter Account Number:");
+                    System.out.print("Enter Account Number: ");
                     accountNumber = scan.nextInt();
                     scan.nextLine();
                     System.out.print("Enter Amount: ");
@@ -54,7 +54,7 @@ public class BankingApplication2 {
                     bank.depositMoney(accountNumber, amount);
                     break;
                 case 5:
-                    System.out.print("Enter Account Number:");
+                    System.out.print("Enter Account Number: ");
                     accountNumber = scan.nextInt();
                     scan.nextLine();
                     System.out.print("Enter Amount: ");
