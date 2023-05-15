@@ -24,15 +24,17 @@ public class BankingApplication2 {
 
             System.out.print("Enter your choice : ");
             option = scan.nextInt();
-            //scan.nextLine();
 
             switch (option) {
                 case 1:
                     bank.listAccount();
                     break;
                 case 2:
-                    accountNumber = 111111;
-                    accountName = "Henry";
+                    System.out.println("Enter Account Number:");
+                    accountNumber = scan.nextInt();
+                    scan.nextLine();
+                    System.out.println("Enter Account Name:");
+                    accountName = scan.nextLine();
                     bank.openAccount(accountNumber, accountName);
                     break;
                 case 3:
